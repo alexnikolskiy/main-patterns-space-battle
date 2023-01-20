@@ -1,7 +1,8 @@
 import { MoveWithFuel } from './move-with-fuel'
 import { Movable } from './move'
-import { FuelBurnable, CommandException } from './fuel'
-import Vector from "./types/vector"
+import { FuelBurnable } from './fuel'
+import Vector from "../types/vector"
+import { CommandException } from '../exception'
 
 describe('Move with fuel', function () {
   it('should move with fuel', function () {

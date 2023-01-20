@@ -1,4 +1,5 @@
-import { FuelBurnable, BurnFuelCommand, CheckFuelCommand, CommandException } from './fuel'
+import { FuelBurnable, BurnFuelCommand, CheckFuelCommand } from './fuel'
+import { CommandException } from '../exception'
 
 describe('fuel', function () {
   it('should burn fuel if it enough', function () {

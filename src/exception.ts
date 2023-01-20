@@ -1,4 +1,4 @@
-export const queue: Command[] = []
+import { queue } from './main'
 
 interface ExceptionHandlerFunction {
   (command?: Command, exception?: Error): void
@@ -88,26 +88,9 @@ export const repeatTwiceCommandHandler: ExceptionHandlerFunction = (command, exc
   queue.push(repeatTwiceCommand)
 }
 
-export const run = (exceptionHandler: ExceptionHandler, stopOnEmpty?: boolean) => {
-  while (true) {
-    if (stopOnEmpty && queue.length === 0) {
-      break
-    }
-
-    const command = queue.shift()
-
-    if (!command) {
-      continue
-    }
-
-    try {
-      command.execute()
-    } catch (err) {
-      if (err instanceof Error) {
-        exceptionHandler.handle(command, err)
-      } else {
-        throw err
-      }
-    }
+export class CommandException extends Error {
+  constructor(message?: string) {
+    super(message)
+    Object.setPrototypeOf(this, CommandException.prototype)
   }
 }

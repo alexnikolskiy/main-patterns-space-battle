@@ -1,4 +1,4 @@
-import Vector from "./types/vector"
+import Vector from "../types/vector"
 
 export interface Movable {
   getPosition(): Vector

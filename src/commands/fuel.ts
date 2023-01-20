@@ -1,15 +1,11 @@
+import { CommandException } from '../exception'
+
 export interface FuelBurnable {
   getFuelLevel(): number
   setFuelLevel(fuelLevel: number): void
   getFuelConsumption(): number
 }
 
-export class CommandException extends Error {
-  constructor(message?: string) {
-    super(message)
-    Object.setPrototypeOf(this, CommandException.prototype)
-  }
-}
 
 export class CheckFuelCommand implements Command {
   private fuelBurnable: FuelBurnable

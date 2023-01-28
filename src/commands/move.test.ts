@@ -1,5 +1,5 @@
 import { MoveCommand, Movable } from './move'
-import Vector from "./types/vector"
+import Vector from "../types/vector"
 
 describe('move', function () {
   it('should return new position (5, 8) when old position is (12, 5) and velocity is (-7, 3)', function () {

@@ -14,8 +14,12 @@ export class LeafScope implements IScope {
   }
 }
 
-export class Scope implements Scope {
-  constructor(private dependencies: Map<string, Resolver>, private parent: Scope) {}
+export class Scope implements IScope {
+  constructor(private dependencies: Map<string, Resolver>, private parent: IScope) {}
+
+  public getDependencies() {
+    return this.dependencies
+  }
 
   resolve(key: string, args: object[]): object {
     if (this.dependencies.has(key)) {

@@ -1,18 +1,12 @@
 import { SetupStrategyCommand } from './setup-strategy'
-import { IScope } from './scope'
 
 export type Strategy = (key: string, args: object[]) => object
 
 export class IoC {
   private static strategy: Strategy = IoC.defaultStrategy
-  private static scope: IScope
 
   public static setStrategy(strategy: Strategy) {
     IoC.strategy = strategy
-  }
-
-  public static setScope(scope: IScope) {
-    IoC.scope = scope
   }
 
   public static resolve<T>(key: string, ...args: object[]): T {
@@ -26,7 +20,7 @@ export class IoC {
       case 'IoC.Default':
         return IoC.defaultStrategy
       default:
-        throw new Error('Unknown IoC dependency')
+        throw new Error(`Unknown IoC dependency ${key}`)
     }
   }
 }

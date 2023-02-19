@@ -1,10 +1,10 @@
-import { IScope } from './scope'
-import { IoC } from './ioc'
+import { Scope } from './scope'
+import { ScopeStrategy } from './scope-strategy'
 
 export class SetupScopeCommand implements Command {
-  constructor(private readonly scope: IScope) {}
+  constructor(private readonly scope: Scope) {}
 
   execute() {
-    IoC.setScope(this.scope)
+    ScopeStrategy.setScope(this.scope)
   }
 }

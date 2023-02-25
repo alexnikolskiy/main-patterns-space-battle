@@ -5,7 +5,7 @@ export class RegisterDependencyCommand implements Command {
   constructor(private readonly key: string, private readonly strategy: Resolver) {}
 
   execute() {
-    if (!ScopeStrategy.getScope()?.getDependencies().set(this.key, this.strategy)) {
+    if (!ScopeStrategy.getCurrentScope()?.getDependencies().set(this.key, this.strategy)) {
       throw new Error('Failed to register dependency')
     }
   }

@@ -1,4 +1,4 @@
-import { SetupStrategyCommand } from './setup-strategy'
+import { SetupStrategyCommand } from './setup-strategy.command'
 
 export type Strategy = (key: string, args: object[]) => object
 

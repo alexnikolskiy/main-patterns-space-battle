@@ -1,7 +1,9 @@
 import { IoC, Strategy } from './ioc'
 import { Resolver, Scope, LeafScope } from './scope'
-import { SetupScopeCommand } from './setup-scope'
-import { RegisterDependencyCommand } from './register-dependency'
+import { SetupCurrentScopeCommand } from './setup-current-scope.command'
+import { RegisterDependencyCommand } from './register-dependency.command'
+import { GetCurrentScopeCommand } from './get-current-scope.command'
+import { NewScopeCommand } from './new-scope.command'
 import { ScopeStrategy } from './scope-strategy'
 
 export class InitScopeCommand implements Command {
@@ -21,20 +23,15 @@ export class InitScopeCommand implements Command {
     })
 
     dependencies.set('Scopes.New', (args) => {
-      return new Scope(
-        IoC.resolve<Map<string, Resolver>>('Scopes.Storage'),
-        args[0] as Scope
-      )
+      return new NewScopeCommand(args[0] as unknown as string)
     })
 
-    dependencies.set('Scopes.Get', () => {
-      const scope = ScopeStrategy.getScope()
-
-      return scope ?? ScopeStrategy.defaultScope
+    dependencies.set('Scopes.Current', () => {
+      return new GetCurrentScopeCommand()
     })
 
-    dependencies.set('Scopes.Set', (args) => {
-      return new SetupScopeCommand(args[0] as Scope)
+    dependencies.set('Scopes.Current.Set', (args) => {
+      return new SetupCurrentScopeCommand(args[0] as unknown as string)
     })
 
     dependencies.set('IoC.Register', (args) => {
@@ -44,7 +41,5 @@ export class InitScopeCommand implements Command {
     ScopeStrategy.setRoot(scope)
 
     IoC.resolve<Command>('IoC.SetupStrategy', ScopeStrategy.resolve)
-
-    new SetupScopeCommand(scope).execute()
   }
 }

@@ -1,4 +1,3 @@
-import { Scope } from './scope'
 import { ScopeStrategy } from './scope-strategy'
 
 export class SetupCurrentScopeCommand implements Command {

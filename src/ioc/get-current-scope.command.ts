@@ -4,6 +4,6 @@ export class GetCurrentScopeCommand implements Command {
   execute() {
     const scope = ScopeStrategy.getCurrentScope()
 
-    return scope ?? ScopeStrategy.defaultScope
+    return scope ?? ScopeStrategy.defaultScope()
   }
 }

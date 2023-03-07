@@ -22,7 +22,7 @@ export class ScopeStrategy {
     this.currentScope = scope
   }
 
-  public static getScope(key: string): Scope | null | undefined {
+  public static getScope(key: string): Scope | undefined {
     return this.scopes.get(key)
   }
 

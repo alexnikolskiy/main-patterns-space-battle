@@ -40,6 +40,6 @@ export class InitScopeCommand implements Command {
 
     ScopeStrategy.setRoot(scope)
 
-    IoC.resolve<Command>('IoC.SetupStrategy', ScopeStrategy.resolve)
+    IoC.resolve<Command>('IoC.SetupStrategy', ScopeStrategy.resolve).execute()
   }
 }

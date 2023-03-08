@@ -17,7 +17,9 @@ describe('init-scope command', function () {
   it('should init scope', function () {
     const command = new InitScopeCommand()
     let rootScope: Scope | null = null
-    const resolveMock = jest.fn()
+    const executeMock = jest.fn()
+    const setupStrategyCommandMock: Command = { execute: executeMock }
+    const resolveMock = jest.fn().mockReturnValue(setupStrategyCommandMock)
     const setRootMock = jest.fn().mockImplementation((scope: Scope) => { rootScope = scope })
     IoC.resolve = resolveMock
     ScopeStrategy.setRoot = setRootMock
@@ -31,6 +33,7 @@ describe('init-scope command', function () {
     expect(rootScope!.getDependencies().has('IoC.Register'))
     expect(resolveMock).toHaveBeenCalledWith('IoC.Default')
     expect(resolveMock).toHaveBeenCalledWith('IoC.SetupStrategy', ScopeStrategy.resolve)
+    expect(executeMock).toHaveBeenCalled()
   })
 
   it('should not init scope again', function () {

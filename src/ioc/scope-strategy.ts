@@ -30,7 +30,7 @@ export class ScopeStrategy {
     this.scopes.set(key, scope)
   }
 
-  public static resolve(key: string, args: object[]): object {
+  public static resolve(key: string, args?: object[]): object {
     if (key === 'Scopes.Root') {
       return this.root as Scope
     } else {
@@ -38,7 +38,7 @@ export class ScopeStrategy {
         this.currentScope = this.defaultScope() as Scope
       }
 
-      return this.currentScope.resolve(key, args)
+      return this.currentScope.resolve(key, args!)
     }
   }
 }

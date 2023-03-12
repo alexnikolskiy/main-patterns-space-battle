@@ -1,6 +1,6 @@
 import { SetupStrategyCommand } from './setup-strategy.command'
 
-export type Strategy = (key: string, args?: object[]) => object
+export type Strategy = (key: string, args?: (object | string)[]) => object
 
 export class IoC {
   private static strategy: Strategy = IoC.defaultStrategy
@@ -9,11 +9,11 @@ export class IoC {
     IoC.strategy = strategy
   }
 
-  public static resolve<T>(key: string, ...args: object[]): T {
+  public static resolve<T>(key: string, ...args: (object | string)[]): T {
     return IoC.strategy(key, args) as T
   }
 
-  private static defaultStrategy(key: string, args?: object[]) {
+  private static defaultStrategy(key: string, args?: (object | string)[]) {
     switch (key) {
       case 'IoC.SetupStrategy':
         return new SetupStrategyCommand(args![0] as Strategy)

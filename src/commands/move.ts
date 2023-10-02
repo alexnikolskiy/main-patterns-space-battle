@@ -1,9 +1,9 @@
 import Vector from "../types/vector"
 
-export interface Movable {
-  getPosition(): Vector
-  setPosition(position: Vector): void
-  getVelocity(): Vector
+export abstract class Movable {
+  abstract getPosition(): Vector
+  abstract setPosition(position: Vector): void
+  abstract getVelocity(): Vector
 }
 
 export class MoveCommand implements Command {

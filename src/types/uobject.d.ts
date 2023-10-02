@@ -1,0 +1,1 @@
+type UObject = Map<string, unknown>

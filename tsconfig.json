@@ -14,8 +14,14 @@
     "isolatedModules": true,
     "baseUrl": "./src",
     "noFallthroughCasesInSwitch": true,
-    "outDir": "./build"
+    "outDir": "./build",
+    "emitDecoratorMetadata": true,
+    "plugins": [{ "transform": "typescript-rtti/dist/transformer" }]
   },
+  "files": [
+    "src/types/command.d.ts",
+    "src/types/uobject.d.ts"
+  ],
   "compileOnSave": true,
   "include": ["./src"]
 }
